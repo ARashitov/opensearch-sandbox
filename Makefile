@@ -1,6 +1,6 @@
 # Project utilities
 env_create:
-	conda create -n research_gps_activity_extraction python=3.10 -y
+	conda create -n apache_kafka_sandbox python=3.10 -y
 
 env_configure: env_install_dependencies env_install_jupyter_extensions env_install_precommit_hooks
 	echo "Environment is configured"
@@ -26,10 +26,16 @@ env_install_jupyter_extensions:
 	&& jt -t grade3
 
 env_delete:
-	conda remove --name research_gps_activity_extraction --all -y
+	conda remove --name apache_kafka_sandbox --all -y
 
 run_jupyter:
 	jupyter-notebook --ip 0.0.0.0 --no-browser
 
 run_precommit:
 	pre-commit run --all-files
+
+kafka_run:
+	docker-compose -f docker-compose.yaml up -d
+
+kafka_stop:
+	docker-compose -f docker-compose.yaml down
