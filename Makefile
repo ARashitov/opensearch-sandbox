@@ -39,3 +39,9 @@ kafka_run:
 
 kafka_stop:
 	docker-compose -f docker-compose.yaml down
+
+run_producer:
+	python3 'src/producer.py'
+
+run_consumer:
+	python3 'src/consumer.py'
