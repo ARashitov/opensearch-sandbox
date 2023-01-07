@@ -10,6 +10,7 @@ def handler(
         value_serializer: callable,
         data_stream: str,
         logger: object,
+        producer_sleep_sec: int,
 ):
 
     def success_callback(record):
@@ -25,7 +26,7 @@ def handler(
     bet_generator = BetGenerator()
 
     while (True):
-        sleep(2)
+        sleep(producer_sleep_sec)
         producer \
             .send(data_stream, bet_generator.generate()) \
             .add_callback(success_callback) \
