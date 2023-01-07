@@ -43,5 +43,8 @@ kafka_stop:
 run_producer:
 	python3 'src/producer.py'
 
-run_consumer:
+run_classical_consumer:
 	python3 'src/consumer.py'
+
+run_batch_consumer:
+	python3 'src/consumer_batch.py'
