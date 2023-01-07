@@ -3,12 +3,11 @@ import sys
 
 from kafka import KafkaConsumer
 
-from src import config
-from src.shared import io
-
-
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
+
+from src.shared import io  # noqa: I100,E402
+from src import config  # noqa: I100,E402
 
 
 def handler(
