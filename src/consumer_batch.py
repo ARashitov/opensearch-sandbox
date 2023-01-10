@@ -1,5 +1,7 @@
 import os
 import sys
+from time import sleep
+
 
 from kafka import KafkaConsumer
 
@@ -27,7 +29,8 @@ def handler(
     )
     while True:
         message = consumer.poll(**poll_kwargs)
-        logger.info(f'{message}')
+        logger.info(f'{message.keys()}')
+        sleep(config.KAFKA_MIN_POLL_TIMEOUT_MS / 1000)
 
 
 if __name__ == "__main__":
@@ -39,7 +42,7 @@ if __name__ == "__main__":
         consumer_group_id=config.KAFKA_CONSUMER_GROUP_ID,
         logger=logger,
         poll_kwargs={
-            "timeout_ms": config.KAFKA_POLL_TIMEOUT_MS,
+            "timeout_ms": config.KAFKA_MAX_POLL_TIMEOUT_MS,
             "max_records": config.KAFKA_POLL_MAX_RECORDS,
         },
     )
