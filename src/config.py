@@ -7,7 +7,7 @@ from pydantic import Field
 
 class Settings(BaseSettings):
     index: str = Field(default="bets")
-    amt_bets_to_generate: int = Field(default=2000)
+    amt_bets_to_generate: int = Field(default=5000)
     opensearch_url: str = Field(default="http://localhost:9200/")
 
 
