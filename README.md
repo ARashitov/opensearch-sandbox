@@ -1,6 +1,6 @@
-# Apache Kafka sandbox
+# OpenSearch sandbox (ex ElasticSearch)
 
-Project for investigation & personal experiments with Apache Kafka on Python
+Project for investigation & personal experiments with OpenSearch
 
 ## 📦 Prerequisites
 
@@ -10,8 +10,7 @@ Project for investigation & personal experiments with Apache Kafka on Python
 
 ## 💼 Management options
 
-- to spin up docker container with kafka: `make kafka_run`
-- to stop docker container with kafka: `make kafka_stop`
+NOT IMPLEMENTED
 
 ## 🐍 Python dependencies
 
