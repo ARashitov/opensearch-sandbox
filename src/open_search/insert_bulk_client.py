@@ -14,7 +14,7 @@ def factory_bulk_index_action(
 ) -> list[str, dict]:
     actions = []
     for _id, bet in enumerate(bets):
-        action = {"index": {"_index": index, "_id": _id}}
+        action = {"index": {"_index": index}}
         actions.append(action)
         actions.append(bet)
     return actions
@@ -34,4 +34,3 @@ if __name__ == "__main__":
     bets = generators.generate_fake_bets(settings.amt_bets_to_generate)
     bulk_index_body = factory_bulk_index_action(bets, index=settings.index)
     response = os_client.bulk(body=bulk_index_body)
-    logger.info(response)
