@@ -1,14 +1,18 @@
 import logging
 import sys
 
-from pydantic import BaseSettings
-from pydantic import Field
+import pydantic
 
 
-class Settings(BaseSettings):
-    index: str = Field(default="bets")
-    amt_bets_to_generate: int = Field(default=5000)
-    opensearch_url: str = Field(default="http://localhost:9200/")
+class Settings(pydantic.BaseSettings):
+    index: str = pydantic.Field(default="bets")
+    amt_bets_to_generate: int = pydantic.Field(default=5)
+    opensearch_url: str = pydantic.Field(default="http://localhost:9200/")
+    opensearch_hosts: list[pydantic.AnyHttpUrl] = pydantic.Field(
+        default=[
+            "http://localhost:9200/",
+        ],
+    )
 
 
 root = logging.getLogger()
