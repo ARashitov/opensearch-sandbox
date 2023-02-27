@@ -8,12 +8,36 @@ settings = config.settings
 logger = config.logger
 
 
-def retrieve_sql(client, index: str):
+def retrieve_filter_sql(client, index: str):
     response = client.transport.perform_request(
         method='POST',
         url='/_plugins/_sql',
         params={"format": "json"},
         body={'query': f"SELECT * FROM {index} WHERE client.application_version = 'v2' LIMIT 5"},
+    )
+    return response
+
+
+def aggregate_money_amt(client, index: str):
+    QUERY = f"""
+        SELECT
+            transaction.money.currency_name currency,
+            STD(transaction.money.amount) std_amount,
+            AVG(transaction.money.amount) avg_amount
+        FROM
+            {index}
+        GROUP BY
+            transaction.money.currency_name
+    """
+    response = client.transport.perform_request(
+        method='POST',
+        url='/_plugins/_sql',
+        params={
+            # "format": "csv",
+            # "format": "raw",
+            # "format": "json",
+        },
+        body={'query': QUERY},
     )
     return response
 
@@ -30,5 +54,6 @@ if __name__ == "__main__":
     )
 
     bets = generators.generate_fake_bets(1)
-    results = retrieve_sql(os_client, index=settings.index)
+
+    results = aggregate_money_amt(os_client, index=settings.index)
     logger.info(results)
