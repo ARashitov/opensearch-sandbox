@@ -7,7 +7,7 @@ import pydantic
 
 
 class Settings(pydantic.BaseSettings):
-    index: str = pydantic.Field(default="events-for-test")
+    index: str = pydantic.Field(default="events_for_test")
     amt_bets_to_generate: int = pydantic.Field(default=10000)
     opensearch_url: str = pydantic.Field(default="https://localhost:9200/")
     opensearch_basic_auth: tuple[str, str] = pydantic.Field(default=("admin", "admin"))
