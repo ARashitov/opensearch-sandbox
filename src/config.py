@@ -7,15 +7,11 @@ import pydantic
 
 
 class Settings(pydantic.BaseSettings):
-    index: str = pydantic.Field(default="bets")
-    amt_bets_to_generate: int = pydantic.Field(default=2)
+    index: str = pydantic.Field(default="events-for-test")
+    amt_bets_to_generate: int = pydantic.Field(default=10000)
     opensearch_url: str = pydantic.Field(default="https://localhost:9200/")
     opensearch_basic_auth: tuple[str, str] = pydantic.Field(default=("admin", "admin"))
-    opensearch_hosts: list[pydantic.AnyHttpUrl] = pydantic.Field(
-        default=[
-            "https://admin:admin@localhost:9200/",
-        ],
-    )
+    opensearch_hosts: list[pydantic.AnyHttpUrl] = ["https://admin:admin@localhost:9200/"]
 
 
 root = logging.getLogger()
