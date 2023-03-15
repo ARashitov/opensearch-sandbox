@@ -24,6 +24,6 @@ if __name__ == "__main__":
 
     logger.info(config.client.info())
     bets = generators.generate_fake_bets(settings.amt_bets_to_generate)
-    bets = pd.json_normalize(bets).to_dict("records")
+    bets = pd.json_normalize(bets, sep="__").to_dict("records")
     bulk_index_body = factory_bulk_index_action(bets, index=settings.index)
     response = config.client.bulk(body=bulk_index_body)
